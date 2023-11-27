@@ -1,8 +1,14 @@
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+// Select a weight from the available options
+const poppins = Poppins({
+  weight: ["400", "900"],
+  display: "swap",
+  subsets: ["latin"],
+  variable: "--poppins-font",
+});
 
 export const metadata = {
   title: "RifqiAnimeList",
@@ -12,7 +18,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className} suppressContentEditableWarning={true}>
+      <body
+        className={`${poppins.className} bg-color-dark`}
+        suppressContentEditableWarning={true}
+      >
         <NavBar />
         {children}
       </body>
