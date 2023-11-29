@@ -1,5 +1,6 @@
 import Link from "next/link";
 import InputSearch from "./InputSearch";
+import UserAuth from "./userAuth";
 
 const NavBar = () => {
   return (
@@ -9,6 +10,7 @@ const NavBar = () => {
           RifqiAnimeList
         </Link>
         <InputSearch />
+        <UserAuth />
       </div>
     </header>
   );

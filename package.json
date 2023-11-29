@@ -5,13 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "start": "HTTPS=true react-scripts start"
+    "start": "HTTPS=true react-scripts start",
+    "lint": "next lint"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.0.15",
     "next": "14.0.3",
+    "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
     "react-youtube": "^10.1.0"
