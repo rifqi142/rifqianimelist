@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import YouTube from "react-youtube";
+import Youtube from "react-youtube";
 
 const VideoPlayer = ({ youtubeId }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -9,6 +9,7 @@ const VideoPlayer = ({ youtubeId }) => {
   const handleVideoPlayer = () => {
     setIsOpen((prevState) => !prevState);
   };
+
   const option = {
     width: "300",
     height: "250",
@@ -23,29 +24,28 @@ const VideoPlayer = ({ youtubeId }) => {
         >
           X
         </button>
-        <YouTube
+        <Youtube
           videoId={youtubeId}
           onReady={(event) => event.target.pauseVideo()}
           opts={option}
-          onError={() => alert("Video tidak tersedia")}
+          onError={() => alert("Video is broken, please try another.")}
         />
       </div>
     );
   };
 
-  const OpenVideoPlayer = () => {
+  const ButtonOpenPlayer = () => {
     return (
       <button
         onClick={handleVideoPlayer}
-        className="rounded fixed button-0 right-0 w-32 bg-color-primary
-         text-color-dark text-md hover:bg-color-accent transition-all shadow-xl"
+        className="rounded fixed bottom-5 right-5 w-32 bg-color-primary text-color-dark text-xl hover:bg-color-accent transition-all shadow-xl"
       >
         Tonton Trailer
       </button>
     );
   };
 
-  return isOpen ? <Player /> : <OpenVideoPlayer />;
+  return isOpen ? <Player /> : <ButtonOpenPlayer />;
 };
 
 export default VideoPlayer;

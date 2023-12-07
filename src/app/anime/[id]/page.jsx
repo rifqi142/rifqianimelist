@@ -5,14 +5,17 @@ import React from "react";
 import CollectionButton from "@/components/AnimeList/CollectionButton";
 import { authUserSession } from "@/libs/auth-libs";
 import prisma from "@/libs/prisma";
+import CommentInput from "@/components/AnimeList/CommentInput";
+import CommentBox from "@/components/AnimeList/CommentBox";
 
 const Page = async ({ params: { id } }) => {
   const anime = await getAnimeResponse(`anime/${id}`);
   const user = await authUserSession();
-  // mencari data collection berdasarkan user_email dan anime_mal_id
+
   const collection = await prisma.collection.findFirst({
     where: { user_email: user?.email, anime_mal_id: id },
   });
+
   return (
     <>
       <div className="pt-4 px-4">
@@ -20,7 +23,12 @@ const Page = async ({ params: { id } }) => {
           {anime.data.title} - {anime.data.year}
         </h3>
         {!collection && user && (
-          <CollectionButton anime_mal_id={id} user_email={user?.email} />
+          <CollectionButton
+            anime_mal_id={id}
+            user_email={user?.email}
+            anime_image={anime.data.images.webp.image_url}
+            anime_title={anime.data.title}
+          />
         )}
         <div className="pt-4 px-4 flex gap-2 text-color-primary overflow-x-auto overflow-hidden">
           <div
@@ -94,6 +102,24 @@ const Page = async ({ params: { id } }) => {
             <p className="text-justify text-xl">{anime.data.synopsis}</p>
           </div>
         </div>
+      </div>
+      <div className="p-4">
+        {user && (
+          <CommentInput
+            anime_mal_id={id}
+            user_email={user?.email}
+            username={user?.name}
+            anime_title={anime.data.title}
+          />
+        )}
+
+        <h3
+          className="text-color-primary 
+        text-2xl mt-4"
+        >
+          Komentar:
+        </h3>
+        <CommentBox anime_mal_id={id} />
       </div>
       <div>
         <VideoPlayer youtubeId={anime.data.trailer.youtube_id} />
